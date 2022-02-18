@@ -1,13 +1,147 @@
+$primary-color: #1a1a40;
+$secondary-color: #fa58b6;
+$primary-text-color: #fff;
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  outline: 0;
+  border: 0;
+}
+.text-gradient-1 {
+  background: linear-gradient(90deg, $primary-color, $secondary-color);
+  background-clip: text;
+  color: transparent;
+  //experimental
+  // animation: text-gradient-animation-1 6s 0s infinite;
+}
+.text-gradient-2 {
+  background: linear-gradient(276deg, $primary-color, $secondary-color);
+  background-clip: text;
+  color: transparent;
+  transition: 1s ease-in-out;
+  //experimental
+  // animation: text-gradient-animation-1 s 0s infinite;
+}
+#logo {
+  font-size: 20px;
+  font-weight: 900;
+  @extend .text-gradient-1;
+}
+a {
+  color: $primary-color;
+  text-decoration: none;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: $secondary-color;
+    border-bottom: 1px solid $secondary-color;
+  }
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #f5f0e6;
+}
+.flex {
+  display: flex;
+  &--center {
+    @extend .flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &--space-between {
+    @extend .flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &--space-around {
+    @extend .flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &--column {
+    @extend .flex;
+    flex-direction: column;
+  }
+  &--row {
+    @extend .flex;
+    flex-direction: row;
+  }
+}
+header {
+  @extend .flex--space-between;
+  padding: 1rem;
+}
+.container {
+  max-width: 980px;
+  width: 100%;
+  margin: auto;
+}
+#home {
+  min-height: 400px;
+  h1 {
+    @extend .text-gradient-1;
+  }
+  @extend .flex--column;
+  @extend .flex--center;
+}
+main {
+  padding: 1rem;
+}
+button {
+  padding: 10px;
+  // display: none;
+}
+#drum-machine {
+  #display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    * {
+      align-self: center;
+      justify-self: center;
+    }
+  }
+}
+.drum-pad {
+  cursor: url("../public/stick.png"), pointer;
+  position: relative;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 2px;
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+  transform: rotateX(50deg) rotateZ(25deg);
+  z-index: 4;
+  font-weight: 900;
+  transition: 0.1s ease-in-out;
+  perspective: 200px;
+  box-shadow: 4px 4px 0px 0px black;
+
+  &:focus {
+    transform: translate(4px, 4px) rotateX(50deg) rotateZ(25deg);
+    box-shadow: none;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+/*Below sass is experimental*/
+// @keyframes text-gradient-animation-1 {
+//   @for $i from 1 through 6 {
+//     #{100/6*$i}% {
+//       background: linear-gradient(
+//         #{60/6 * $i}deg,
+//         $primary-color,
+//         $secondary-color
+//       );
+//       background-clip: text;
+//       color: transparent;
+//     }
+//   }
+// }

@@ -1,7 +1,13 @@
+import { Link } from "react-router-dom";
+
 const links = [
   {
     text: "Home",
     path: "/",
+  },
+  {
+    text: "Drum",
+    path: "/Drum",
   },
   {
     text: "Calculator",
@@ -11,17 +17,19 @@ const links = [
     text: "Pomodo",
     path: "/pomodo",
   },
-  {
-    text: "Drum",
-    path: "/Drum",
-  },
 ];
 
 function Navbar() {
   return (
     <header>
-      <div id="logo"></div>
-      <nav></nav>
+      <div id="logo">Drucal pomodo</div>
+      <nav>
+        {links.map((link) => (
+          <Link to={link.path} key={link.path}>
+            {link.text}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }
