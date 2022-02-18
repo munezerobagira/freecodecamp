@@ -29,11 +29,11 @@ const drumKeys = [
     text: "C",
   },
 ];
-
 function Drum() {
   const [volume, setVolume] = useState(100);
   const [audioString, setAudioString] = useState("");
   const handleClick = async (e) => {
+    e.target.focus();
     let audioElement = e.target.children[0];
     audioElement.currentTime = 0;
     audioElement.volume = parseFloat(parseFloat(volume) / 100);
@@ -44,6 +44,8 @@ function Drum() {
     (e) => {
       const key = e.key.toUpperCase();
       let audioElement = document.getElementById(key);
+      audioElement.parentNode.focus();
+      console.log(audioElement.parentNode);
       audioElement.currentTime = 0;
       audioElement.volume = parseFloat(parseFloat(volume) / 100);
       setAudioString(audioElement.getAttribute("src").split(".mp3")[0]);
