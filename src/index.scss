@@ -147,8 +147,7 @@ button {
   box-shadow: 4px 4px 0px 0px black;
 
   &:focus {
-    transform: translate(4px, 4px) rotateX(50deg) rotateZ(25deg);
-    box-shadow: none;
+    animation: drum 0.3s ease-in-out 0s alternate;
   }
 }
 #calculator {
@@ -186,6 +185,21 @@ button {
 }
 
 /*Below sass is experimental*/
+
+@keyframes drum {
+  0% {
+    transform: rotateX(50deg) rotateZ(25deg);
+    box-shadow: 4px 4px 0px 0px black;
+  }
+  50% {
+    transform: translate(4px, 4px) rotateX(50deg) rotateZ(25deg);
+    box-shadow: none;
+  }
+  100% {
+    transform: rotateX(50deg) rotateZ(25deg);
+    box-shadow: 4px 4px 0px 0px black;
+  }
+}
 @keyframes text-gradient-animation-1 {
   @for $i from 1 through 100 {
     #{100/100*$i}% {

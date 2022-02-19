@@ -29,6 +29,9 @@ const drumKeys = [
     text: "C",
   },
 ];
+function unfocus(element) {
+  element.blur();
+}
 function Drum() {
   const [volume, setVolume] = useState(100);
   const [audioString, setAudioString] = useState("");
@@ -38,6 +41,8 @@ function Drum() {
     audioElement.currentTime = 0;
     audioElement.volume = parseFloat(parseFloat(volume) / 100);
     setAudioString(audioElement.getAttribute("src").split(".mp3")[0]);
+    setTimeout(unfocus, 300, e.target);
+
     audioElement.play();
   };
   const handlePress = useCallback(
@@ -45,6 +50,7 @@ function Drum() {
       const key = e.key.toUpperCase();
       let audioElement = document.getElementById(key);
       audioElement.parentNode.focus();
+      setTimeout(unfocus, 300, audioElement.parentNode);
       console.log(audioElement.parentNode);
       audioElement.currentTime = 0;
       audioElement.volume = parseFloat(parseFloat(volume) / 100);
