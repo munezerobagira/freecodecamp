@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const elements = {
   numbers: [
     { text: "1", id: "one" },
@@ -18,6 +19,25 @@ const elements = {
     { text: "/", id: "divide" },
   ],
 };
+
+// TODO:a function to calculate the result of mathematical expression without using eval()
+function calculate(expression) {
+  const regex = /[+\-*/]/g;
+  const operators = expression.match(regex);
+  const numbers = expression.split(regex);
+  let result = 0;
+  if (operators[0] === "+") {
+    result = parseFloat(numbers[0]) + parseFloat(numbers[1]);
+  } else if (operators[0] === "-") {
+    result = parseFloat(numbers[0]) - parseFloat(numbers[1]);
+  } else if (operators[0] === "*") {
+    result = parseFloat(numbers[0]) * parseFloat(numbers[1]);
+  } else if (operators[0] === "/") {
+    result = parseFloat(numbers[0]) / parseFloat(numbers[1]);
+  }
+  return result;
+}
+
 const ADD_INPUT = "ADD_INPUT";
 const CLEAR_INPUT = "CLEAR_INPUT";
 const GET_RESULT = "GET_RESULT";
