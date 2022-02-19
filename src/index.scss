@@ -9,7 +9,37 @@ $primary-text-color: #fff;
   border: 0;
 }
 body {
-  background: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #f5f0e6;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: $secondary-color;
+    border-bottom: 1px solid $secondary-color;
+  }
+}
+button,
+.button {
+  padding: 10px;
+  // display: none;
+}
+.text {
+  &--center {
+    text-align: center;
+  }
+  &--left {
+    text-align: left;
+  }
+  &--right {
+    text-align: right;
+  }
 }
 .text-gradient-1 {
   background: linear-gradient(90deg, $primary-color, $secondary-color);
@@ -26,17 +56,6 @@ body {
   //experimental
   animation: text-gradient-animation-1 s 0s infinite;
 }
-.text {
-  &--center {
-    text-align: center;
-  }
-  &--left {
-    text-align: left;
-  }
-  &--right {
-    text-align: right;
-  }
-}
 @for $i from 1 through 12 {
   .w-#{$i} {
     width: $i/12 * 100%;
@@ -47,21 +66,14 @@ body {
   font-weight: 900;
   @extend .text-gradient-1;
 }
-a {
-  color: $primary-color;
-  text-decoration: none;
-  padding: 10px;
-  font-weight: 600;
-  transition: all 0.3s ease-in-out;
-  &:hover {
-    color: $secondary-color;
-    border-bottom: 1px solid $secondary-color;
+
+@for $i from 1 through 12 {
+  .m-#{$i} {
+    margin: $i/12 * 2rem;
   }
-}
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  background-color: #f5f0e6;
+  .p-#{$i} {
+    padding: $i/12 * 2rem;
+  }
 }
 .flex {
   display: flex;
@@ -108,10 +120,6 @@ header {
 }
 main {
   padding: 1rem;
-}
-button {
-  padding: 10px;
-  // display: none;
 }
 
 #drum-machine {
@@ -168,6 +176,23 @@ button {
   padding: 10px;
 }
 
+.button--styled {
+  background-color: transparent;
+
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+  z-index: 4;
+  display: block;
+  font-weight: 900;
+  transition: 0.1s ease-in-out;
+  perspective: 200px;
+  padding: 10px 30px;
+  box-shadow: 2px 2px 0px 0px black;
+  &:focus {
+    animation: click 0.3s ease-in-out 0s alternate;
+  }
+}
 .calculator--button {
   background-color: transparent;
   span {
@@ -192,13 +217,30 @@ button {
     box-shadow: 4px 4px 0px 0px black;
   }
   50% {
-    transform: translate(4px, 4px) rotateX(50deg) rotateZ(25deg);
+    transform: translate(2px, 4px) rotateX(50deg) rotateZ(25deg);
     box-shadow: none;
   }
   100% {
     transform: rotateX(50deg) rotateZ(25deg);
     box-shadow: 4px 4px 0px 0px black;
   }
+}
+@keyframes click {
+  0% {
+    box-shadow: 2px 2px 0px 0px black;
+  }
+  50% {
+    transform: translate(2px, 4px);
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: 2px 2px 0px 0px black;
+  }
+}
+#pomodo {
+  background-color: $secondary-color;
+  border-radius: 25px;
+  @extend .p-4;
 }
 @keyframes text-gradient-animation-1 {
   @for $i from 1 through 100 {
