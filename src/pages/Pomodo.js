@@ -9,7 +9,7 @@ import pomodoReducer, {
   incrementSessionLength,
   toggleSessionStatus,
   resetEverything,
-} from "../Reducers/pomodoReducer";
+} from "../reducers/pomodoReducer";
 
 function Pomodo() {
   const [pomodo, dispatch] = useReducer(pomodoReducer, initialState);
@@ -46,7 +46,7 @@ function Pomodo() {
   const audioElement = useRef();
   const toggleTime = useCallback(() => {
     if (!intervalFunctionId) {
-      let timeInterval = setInterval(decrTimer, 10);
+      let timeInterval = setInterval(decrTimer, 1000);
       setIntervalFunctionId(timeInterval);
     } else {
       clearInterval(intervalFunctionId);

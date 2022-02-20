@@ -33,32 +33,32 @@ function unfocus(element) {
   element.blur();
 }
 function Drum() {
-  const [volume, setVolume] = useState(100);
   const [audioString, setAudioString] = useState("");
   const handleClick = async (e) => {
     e.target.focus();
     let audioElement = e.target.children[0];
     audioElement.currentTime = 0;
-    audioElement.volume = parseFloat(parseFloat(volume) / 100);
     setAudioString(audioElement.getAttribute("src").split(".mp3")[0]);
     setTimeout(unfocus, 300, e.target);
 
     audioElement.play();
   };
-  const handlePress = useCallback(
-    (e) => {
-      const key = e.key.toUpperCase();
-      let audioElement = document.getElementById(key);
-      audioElement.parentNode.focus();
-      setTimeout(unfocus, 300, audioElement.parentNode);
-      console.log(audioElement.parentNode);
-      audioElement.currentTime = 0;
-      audioElement.volume = parseFloat(parseFloat(volume) / 100);
-      setAudioString(audioElement.getAttribute("src").split(".mp3")[0]);
-      audioElement.play();
-    },
-    [volume]
-  );
+  const handleVolume = useCallback((e) => {
+    const currentVolume = e.target.value;
+    document.getElementsByTagName("audio").forEach((element) => {
+      element.volume = parseFloat(parseFloat(currentVolume) / 100);
+    });
+  }, []);
+  const handlePress = useCallback((e) => {
+    const key = e.key.toUpperCase();
+    let audioElement = document.getElementById(key);
+    audioElement.parentNode.focus();
+    setTimeout(unfocus, 300, audioElement.parentNode);
+    console.log(audioElement.parentNode);
+    audioElement.currentTime = 0;
+    setAudioString(audioElement.getAttribute("src").split(".mp3")[0]);
+    audioElement.play();
+  }, []);
   useEffect(() => {
     window.addEventListener("keypress", handlePress);
   }, [handlePress]);
@@ -66,13 +66,7 @@ function Drum() {
     <section id="drum-machine">
       <div className="flex--row flex--center">
         <label>Volume&nbsp;</label>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={(e) => setVolume(e.target.value)}
-        />
+        <input type="range" min="0" max="100" onChange={handleVolume} />
       </div>
 
       <div id="display">
