@@ -1,4 +1,3 @@
-/*eslint-disable*/
 const elements = {
   numbers: [
     { text: "1", id: "one" },
@@ -21,22 +20,6 @@ const elements = {
 };
 
 // TODO:a function to calculate the result of mathematical expression without using eval()
-function calculate(expression) {
-  const regex = /[+\-*/]/g;
-  const operators = expression.match(regex);
-  const numbers = expression.split(regex);
-  let result = 0;
-  if (operators[0] === "+") {
-    result = parseFloat(numbers[0]) + parseFloat(numbers[1]);
-  } else if (operators[0] === "-") {
-    result = parseFloat(numbers[0]) - parseFloat(numbers[1]);
-  } else if (operators[0] === "*") {
-    result = parseFloat(numbers[0]) * parseFloat(numbers[1]);
-  } else if (operators[0] === "/") {
-    result = parseFloat(numbers[0]) / parseFloat(numbers[1]);
-  }
-  return result;
-}
 
 const ADD_INPUT = "ADD_INPUT";
 const CLEAR_INPUT = "CLEAR_INPUT";
@@ -49,7 +32,7 @@ export const isADot = (value) => value === ".";
 export const isAnEqualSign = (value) => value === "=";
 export const isAClearSign = (value) => value === "AC";
 
-//I present to you code below
+//Below code,Need refactor
 export const initialState = { elements, display: "0", history: "" };
 export default function calculatorReducer(state = initialState, action) {
   switch (action.type) {
@@ -131,13 +114,17 @@ export default function calculatorReducer(state = initialState, action) {
         if (isADot(input))
           return Object.assign({}, state, { display: "0.", history: "0." });
         if (isAnOperator(input) && ["+", "-"].includes(input))
-          return Object.assign({}, state, { display: input, history: input });
+          return Object.assign({}, state, {
+            display: input,
+            history: history + input,
+          });
         return state;
       }
       return state;
     case CLEAR_INPUT:
       return Object.assign({}, state, { display: "0", history: "" });
     case GET_RESULT:
+      // eslint-disable-next-line
       const calculateResultFunction = Function("", `return ${state.history}`);
       return Object.assign({}, state, {
         display: calculateResultFunction(),

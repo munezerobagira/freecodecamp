@@ -9,7 +9,7 @@ import calculatorReducer, {
   clearInput,
   getResult,
   initialState,
-} from "../Reducers/calcutatorReducer";
+} from "../reducer/calcutatorReducer";
 
 function Calculator() {
   const [calculator, dispatch] = useReducer(calculatorReducer, initialState);
