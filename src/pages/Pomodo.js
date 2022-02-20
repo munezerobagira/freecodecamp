@@ -9,7 +9,7 @@ import pomodoReducer, {
   incrementSessionLength,
   toggleSessionStatus,
   resetEverything,
-} from "../reducers/pomodoReducer";
+} from "../reducer/pomodoReducer";
 
 function Pomodo() {
   const [pomodo, dispatch] = useReducer(pomodoReducer, initialState);
